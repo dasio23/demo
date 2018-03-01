@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CapaEntidades;
+using CapaLogicaNegocios;
 
 namespace CapaPresentacion
 {
@@ -16,7 +18,15 @@ namespace CapaPresentacion
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-
+            Empleado objEmpleado = EmpleadoLN.getInstance().AccesoSistema(txtUsuario.Text, txtPassword.Text);
+            if (objEmpleado != null)
+            {
+                Response.Write("<script>alert('USUARIO CORRECTO')</script>");
+                Response.Redirect("PanelGeneral.aspx");
+            }
+            else {
+                Response.Write("<script>alert('USUARIO INCORRECTO')</script>");
+            }
         }
     }
 }
